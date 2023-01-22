@@ -7,6 +7,7 @@ const state: StateObj = {
   garagePage: 1,
   selectedId: null,
   appPage: 'garage',
+  animation: {},
 };
 
 const updateCars = async () => {

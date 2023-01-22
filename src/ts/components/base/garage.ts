@@ -14,9 +14,9 @@ const createGarageOptionsHTML = (): string =>
       <button class="button" type="submit" disabled>Update</button>
     </form>
     <div class="options__race">
-      <button class="button_race button race">Race</button>
-      <button class="button_race button reset">Reset</button>
-      <button class="button generate-cars">Generate cars</button>
+      <button id="race" class="button_race button">Race</button>
+      <button id="reset" class="button_race button">Reset</button>
+      <button id="generate-cars" class="button">Generate cars</button>
     </div>
   </div>`;
 

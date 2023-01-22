@@ -24,7 +24,25 @@ interface StateObj {
   carsCount: number;
   garagePage: number;
   selectedId: number | null;
+  animation: ObjObj;
   appPage?: string;
 }
 
-export { Car, Cars, CreateCar, StateObj, UpdateCar };
+export interface ObjObj {
+  [id: string]: ObjNum;
+}
+
+export interface ObjNum {
+  [id: string]: number;
+}
+
+interface RaceParams {
+  velocity: number;
+  distance: number;
+}
+
+type Engine = {
+  success: boolean;
+};
+
+export { Car, Cars, CreateCar, StateObj, UpdateCar, RaceParams, Engine };

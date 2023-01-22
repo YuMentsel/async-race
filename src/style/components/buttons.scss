@@ -42,6 +42,14 @@
   }
 
   &.stop:hover {
-    border: 3px solid #ca023e;
+    border: 3px solid $error;
+  }
+
+  &:disabled {
+    filter: saturate(1%);
+  }
+
+  &:disabled:hover {
+    border: 3px solid $button-border;
   }
 }

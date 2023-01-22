@@ -1,7 +1,8 @@
-import { Car, Cars, CreateCar, UpdateCar } from '../types/types';
+import { Car, Cars, CreateCar, UpdateCar, RaceParams, Engine } from '../types/types';
 
 const server = 'http://localhost:3000';
 const garage = `${server}/garage`;
+const engine = `${server}/engine`;
 
 const getAllCars = async (page: number, limit = 7): Promise<Cars> => {
   const res = await fetch(`${garage}?_page=${page}&_limit=${limit}`);
@@ -42,4 +43,25 @@ const deleteCar = async (id: number) =>
     })
   ).json();
 
-export { getAllCars, getCar, createCar, updateCar, deleteCar };
+const start = async (id: number): Promise<RaceParams> =>
+  (
+    await fetch(`${engine}?id=${id}&status=started`, {
+      method: 'PATCH',
+    })
+  ).json();
+
+const stop = async (id: number): Promise<RaceParams> =>
+  (
+    await fetch(`${engine}?id=${id}&status=stopped`, {
+      method: 'PATCH',
+    })
+  ).json();
+
+const drive = async (id: number): Promise<Engine> => {
+  const res = await fetch(`${engine}?id=${id}&status=drive`, {
+    method: 'PATCH',
+  }).catch();
+  return res.status === 200 ? { ...(await res.json()) } : { success: false };
+};
+
+export { getAllCars, getCar, createCar, updateCar, deleteCar, start, stop, drive };

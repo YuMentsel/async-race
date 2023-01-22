@@ -1,68 +1,36 @@
 import { getExistentElement } from '../utils/utils';
-import { renderGarage } from '../app';
-import { state, updateState } from '../components/state';
-import { getCar, createCar, updateCar, deleteCar } from '../api/api';
+import { startCar, stopCar } from './animationCars';
+import { createCarHandler, updateCarHandler, selectCarHandler, deleteCarHandler } from './viewCarHandlers';
 
-const createCarHandler = async (e: Event) => {
-  e.preventDefault();
-  const name = getExistentElement<HTMLInputElement>('#create .options__input-text');
-  const color = getExistentElement<HTMLInputElement>('#create .options__input-color');
-  const carParams = new Map().set('name', name.value).set('color', color.value);
-  const newCar = Object.fromEntries(carParams);
-  await createCar(newCar);
-  await updateState();
-  renderGarage();
-  name.value = '';
-  color.value = '#ffffff';
+const raceHandler = async (e: Event) => {
+  if (!(e.target instanceof HTMLButtonElement)) return;
+  e.target.disabled = true;
+  getExistentElement<HTMLFormElement>('#reset').disabled = false;
 };
 
-const updateCarHandler = async (e: Event) => {
-  e.preventDefault();
-  const name = getExistentElement<HTMLInputElement>('#update .options__input-text');
-  const color = getExistentElement<HTMLInputElement>('#update .options__input-color');
-  const button = getExistentElement<HTMLInputElement>('#update button');
-  const updateParams = new Map().set('name', name.value).set('color', color.value);
-  const car = Object.fromEntries(updateParams);
-  if (state.selectedId !== null) {
-    await updateCar(state.selectedId, car);
-    await updateState();
-    renderGarage();
-  }
-  name.value = '';
-  color.value = '#ffffff';
-  name.disabled = true;
-  color.disabled = true;
-  button.disabled = true;
-  state.selectedId = null;
+const resetHandler = async (e: Event) => {
+  if (!(e.target instanceof HTMLButtonElement)) return;
+  e.target.disabled = true;
+  getExistentElement<HTMLFormElement>('#race').disabled = false;
 };
 
-async function listenEvents() {
+const listenEvents = async () => {
   getExistentElement<HTMLFormElement>('#create').addEventListener('submit', (e) => createCarHandler(e));
-
   getExistentElement<HTMLFormElement>('#update').addEventListener('submit', (e) => updateCarHandler(e));
+  getExistentElement<HTMLButtonElement>('#race').addEventListener('click', (e) => raceHandler(e));
+  getExistentElement<HTMLButtonElement>('#reset').addEventListener('click', (e) => resetHandler(e));
 
   document.addEventListener('click', async (e) => {
-    if (!(e.target instanceof HTMLButtonElement) || !e.target.dataset.id) return;
-    console.log(e.target);
-    if (e.target.classList.contains('select')) {
-      const name = getExistentElement<HTMLInputElement>('#update .options__input-text');
-      const color = getExistentElement<HTMLInputElement>('#update .options__input-color');
-      const button = getExistentElement<HTMLInputElement>('#update button');
-      const selectedCar = await getCar(+e.target.dataset.id);
-      state.selectedId = +e.target.dataset.id;
-      name.value = selectedCar.name;
-      color.value = selectedCar.color;
-      name.disabled = false;
-      color.disabled = false;
-      button.disabled = false;
-    }
-    if (e.target.classList.contains('remove')) {
-      const id = +e.target.dataset.id;
-      await deleteCar(id);
-      await updateState();
-      renderGarage();
-    }
+    const { target } = e;
+    if (!(target instanceof HTMLButtonElement)) return;
+    console.log(target);
+    if (target.classList.contains('select')) selectCarHandler(target);
+    if (target.classList.contains('remove')) deleteCarHandler(target);
+    if (target.classList.contains('start')) deleteCarHandler(target);
+    if (target.classList.contains('stop')) deleteCarHandler(target);
+    if (target.classList.contains('start') && target.dataset.start) startCar(+target.dataset.start);
+    if (target.classList.contains('stop') && target.dataset.stop) stopCar(+target.dataset.stop);
   });
-}
+};
 
 export default listenEvents;

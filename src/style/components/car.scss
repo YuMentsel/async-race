@@ -2,19 +2,27 @@
   position: relative;
   height: 75px;
   border-bottom: 2px dashed $text;
+
   &__name {
     vertical-align: bottom;
     margin-left: 10px;
   }
+
+  &__message {
+    color: $error;
+    margin-left: 10px;
+    vertical-align: baseline;
+    font-size: 10px;
+  }
+
   &__svg {
     position: absolute;
     bottom: -3px;
-    width: calc(100% - 80px);
-    transform: translateX(0%);
     svg {
       width: 80px;
     }
   }
+
   &__finish {
     position: absolute;
     bottom: -3px;
