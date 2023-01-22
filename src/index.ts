@@ -1,5 +1,14 @@
 import './index.html';
 import './index.scss';
-import app from './ts/app';
+import { renderPage, renderGaragePage } from './ts/app';
+import listenEvents from './ts/listeners/garageListener';
+import { updateState } from './ts/components/state';
 
-app.render();
+const render = async () => {
+  await updateState();
+  renderPage();
+  renderGaragePage();
+  listenEvents();
+};
+
+render();

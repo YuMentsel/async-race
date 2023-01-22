@@ -7,7 +7,7 @@
     "start": "npx webpack serve --mode development --open",
     "build-prod": "npx webpack --node-env=production",
     "build-dev": "npx webpack",
-    "deploy": "npm run build-prod && npx gh-pages -d dist -m deploy",
+    "deploy": "npx gh-pages -d dist -e async-race",
     "clear": "rd /s /q dist",
     "lint-fix": "npx eslint --ext js,jsx,ts,tsx ./src --fix",
     "test": "jest --config jest.config.js"

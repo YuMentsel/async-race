@@ -1,0 +1,51 @@
+.options {
+  margin-top: 9px;
+
+  &__container {
+    gap: 3px;
+  }
+
+  &__input-color {
+    width: 36px;
+    height: 39px;
+    margin-top: -5px;
+    background: transparent;
+    color: transparent;
+    padding: 0;
+    cursor: pointer;
+    &::-webkit-color-swatch {
+      border-radius: 5px;
+      background: none;
+    }
+  }
+
+  &__form .button {
+    margin-left: 3px;
+  }
+
+  &__race {
+    margin-top: 5px;
+    & .generate-cars {
+      width: 168px;
+    }
+  }
+
+  &__content {
+    display: flex;
+    flex-direction: column;
+    flex-grow: 2;
+    gap: 15px;
+    margin-bottom: 10px;
+    overflow: hidden;
+  }
+
+  &__pagination {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+
+    .pagination__page {
+      text-align: center;
+    }
+  }
+}

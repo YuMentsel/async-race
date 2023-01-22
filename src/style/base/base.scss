@@ -31,11 +31,14 @@ a {
 
 input {
   height: 30px;
-  border-radius: 3px;
+  border-radius: 5px;
   border: none;
   vertical-align: top;
   outline: none;
   padding: 5px 10px;
+  &[type=text]:disabled {
+    background-color: $text;
+  }
 }
 
 .container {
@@ -59,27 +62,3 @@ h2 {
   margin: 20px 0;
 }
 
-footer {
-  height: 70px;
-
-  .container {
-    display: flex;
-    flex-direction: row;
-    align-items: center;
-    justify-content: space-between;
-    &:first-child a {
-      width: 65px;
-    }
-  }
-
-  .git {
-    width: 40px;
-    height: 40px;
-  }
-
-  .rss {
-    width: 65px;
-    height: auto;
-    fill: white;
-  }
-}

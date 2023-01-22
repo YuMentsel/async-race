@@ -1,0 +1,25 @@
+
+footer {
+  height: 70px;
+
+  .container {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-between;
+    &:first-child a {
+      width: 65px;
+    }
+  }
+
+  .git {
+    width: 40px;
+    height: 40px;
+  }
+
+  .rss {
+    width: 65px;
+    height: auto;
+    fill: white;
+  }
+}
