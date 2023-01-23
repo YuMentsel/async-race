@@ -5,7 +5,7 @@ const renderWinners = () => {
   const winners: HTMLElement = createElement('section', 'winners');
   winners.innerHTML = createWinnersHTML();
 
-  getExistentElement('.footer').before(winners);
+  getExistentElement('.pagination').before(winners);
 };
 
 const removeWinners = () => {

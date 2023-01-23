@@ -34,6 +34,9 @@ const setDisable = (id: number) => {
   getExistentElement<HTMLButtonElement>(`#race`).disabled = true;
   getExistentElement<HTMLButtonElement>('.prev').disabled = true;
   getExistentElement<HTMLButtonElement>('.next').disabled = true;
+  getExistentElement<HTMLButtonElement>('#winners-btn').disabled = true;
+  getExistentElement<HTMLButtonElement>('#create button').disabled = true;
+  getExistentElement<HTMLButtonElement>('#generate-cars').disabled = true;
 };
 
 const startCar = async (id: number) => {
@@ -64,6 +67,9 @@ const notDisable = (id: number) => {
   getExistentElement<HTMLButtonElement>(`#remove-${id}`).disabled = false;
   getExistentElement<HTMLButtonElement>('.prev').disabled = false;
   getExistentElement<HTMLButtonElement>('.next').disabled = false;
+  getExistentElement<HTMLButtonElement>('#winners-btn').disabled = false;
+  getExistentElement<HTMLButtonElement>('#create button').disabled = false;
+  getExistentElement<HTMLButtonElement>('#generate-cars').disabled = false;
   buttonDisable();
 };
 

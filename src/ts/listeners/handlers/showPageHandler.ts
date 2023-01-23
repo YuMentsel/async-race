@@ -4,7 +4,7 @@ import { state } from '../../components/state';
 import { StatePage } from '../../types/types';
 import { removeWinners, renderWinners } from '../../winners/winnersPage';
 
-const showGaragePage = async () => {
+const showGaragePage = () => {
   getExistentElement('.garage').style.display = 'block';
   getExistentElement('.options').style.display = 'block';
   getExistentElement('.winners').style.display = 'none';
@@ -13,7 +13,7 @@ const showGaragePage = async () => {
   buttonDisable();
 };
 
-const showWinnersPage = async () => {
+const showWinnersPage = () => {
   removeWinners();
   renderWinners();
   getExistentElement('.garage').style.display = 'none';

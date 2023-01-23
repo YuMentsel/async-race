@@ -9,14 +9,20 @@
     margin-bottom: 10px;
     overflow: hidden;
   }
+}
 
-  &__pagination {
-    display: flex;
+.pagination {
+  margin: 10px 0;
+  .container {
+    flex-direction: row;
     align-items: center;
     gap: 10px;
+  }
 
-    .pagination__page {
-      text-align: center;
-    }
+  &__page {
+    text-align: center;
+    font-size: 22px;
+    font-weight: 700;
+    min-width: 30px;
   }
 }

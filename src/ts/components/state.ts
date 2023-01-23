@@ -34,4 +34,4 @@ const updateState = async () => {
   await updateWinners();
 };
 
-export { state, updateState, updateWinners };
+export { state, updateState, updateWinners, updateCars };

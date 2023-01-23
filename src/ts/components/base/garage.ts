@@ -20,17 +20,19 @@ const createGarageOptionsHTML = (): string =>
     </div>
   </div>`;
 
-const createGarageHTML = (page = 1): string =>
+const createGarageHTML = (): string =>
   `<div class="container">
     <h2 class="garage__title">Garage (${state.carsCount})</h2>
     <div class="garage__content">
     ${state.cars.map((car) => `${createCarHTML(car)}`).join('')}
     </div>
-    <div class="garage__pagination pagination">
-      <button class="button prev" disabled>Prev</button>
-      <span class="pagination__page">${page}</span>
-      <button class="button next">Next</button>
-    </div>
   </div>`;
 
-export { createGarageHTML, createGarageOptionsHTML };
+const createPaginationHTML = (): string =>
+  `<div class="container">
+      <button class="button prev" disabled>Prev</button>
+      <span id='page' class="pagination__page">${state.garagePage}</span>
+      <button class="button next">Next</button>
+  </div>`;
+
+export { createGarageHTML, createGarageOptionsHTML, createPaginationHTML };
