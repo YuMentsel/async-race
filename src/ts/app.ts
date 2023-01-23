@@ -8,11 +8,12 @@ const renderPage = () => {
   const garage: HTMLElement = createElement('main', 'garage');
   const winners: HTMLElement = createElement('section', 'winners');
   const footer: HTMLElement = createElement('footer', 'footer');
+  const win: HTMLElement = createElement('div', 'win');
 
   header.innerHTML = createHeaderHTML();
   footer.innerHTML = createFooterHTML();
 
-  document.body.append(header, garage, winners, footer);
+  document.body.append(header, garage, winners, footer, win);
 };
 
 const renderGarageOptions = () => {

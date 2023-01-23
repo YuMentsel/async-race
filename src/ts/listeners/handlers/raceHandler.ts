@@ -21,6 +21,9 @@ const raceHandler = async (e: Event) => {
   getExistentElement<HTMLFormElement>('#reset').disabled = false;
   if (winner === null) return;
   console.log(winner);
+  const win = getExistentElement('.win');
+  win.innerHTML = `${winner.name} went first in ${winner.time} seconds!`;
+  win.style.display = 'flex';
   await saveWinners(winner);
   await updateWinners();
   removeWinners();
@@ -30,6 +33,7 @@ const raceHandler = async (e: Event) => {
 const resetHandler = (e: Event) => {
   if (!(e.target instanceof HTMLButtonElement)) return;
   e.target.disabled = true;
+  getExistentElement('.win').style.display = 'none';
   state.cars.forEach(({ id }) => stopCar(id));
 
   getExistentElement<HTMLFormElement>('#race').disabled = false;

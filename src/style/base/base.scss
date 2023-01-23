@@ -36,7 +36,7 @@ input {
   vertical-align: top;
   outline: none;
   padding: 5px 10px;
-  &[type=text]:disabled {
+  &[type='text']:disabled {
     background-color: $text;
   }
 }
@@ -62,3 +62,14 @@ h2 {
   margin: 20px 0;
 }
 
+.win {
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  transform: translate(-50%, -50%);
+  font-size: 40px;
+  text-align: center;
+  text-shadow: 1px 5px 20px $main, 1px 5px 20px $main, 1px -5px 10px $main-light, 1px 5px 10px $button-border-hover2;
+  -webkit-text-stroke: 1px $text;
+  -webkit-text-fill-color: $main-light;
+}
