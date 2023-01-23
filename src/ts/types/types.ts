@@ -25,7 +25,7 @@ interface StateObj {
   garagePage: number;
   selectedId: number | null;
   animation: ObjObj;
-  appPage?: string;
+  page: string;
 }
 
 export interface ObjObj {
@@ -45,4 +45,21 @@ type Engine = {
   success: boolean;
 };
 
-export { Car, Cars, CreateCar, StateObj, UpdateCar, RaceParams, Engine };
+interface Winners {
+  id: number;
+  success: boolean;
+  time: number;
+}
+interface Winner {
+  id?: number;
+  name?: string;
+  color?: string;
+  time: number;
+}
+
+enum StatePage {
+  garage = 'garage',
+  winners = 'winners',
+}
+
+export { Car, Cars, CreateCar, StateObj, UpdateCar, RaceParams, Engine, Winners, Winner, StatePage };

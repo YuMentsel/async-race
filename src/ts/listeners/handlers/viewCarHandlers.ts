@@ -1,7 +1,9 @@
-import { getExistentElement } from '../utils/utils';
-import { renderGarage } from '../app';
-import { state, updateState } from '../components/state';
-import { getCar, createCar, updateCar, deleteCar } from '../api/api';
+import { getExistentElement } from '../../utils/utils';
+import { renderGarage } from '../../app';
+import { state, updateState } from '../../components/state';
+import { getCar, createCar, updateCar, deleteCar } from '../../api/api';
+import generateRandomCars from '../../utils/generateCars';
+import { buttonDisable } from './paginationHandlers';
 
 const createCarHandler = async (e: Event) => {
   e.preventDefault();
@@ -14,6 +16,7 @@ const createCarHandler = async (e: Event) => {
   renderGarage();
   name.value = '';
   color.value = '#ffffff';
+  buttonDisable();
 };
 
 const updateCarHandler = async (e: Event) => {
@@ -56,6 +59,18 @@ const deleteCarHandler = async (target: HTMLButtonElement) => {
   await deleteCar(id);
   await updateState();
   renderGarage();
+  buttonDisable();
 };
 
-export { createCarHandler, updateCarHandler, selectCarHandler, deleteCarHandler };
+const generateHandler = async (e: Event) => {
+  if (!(e.target instanceof HTMLButtonElement)) return;
+  e.target.disabled = true;
+  const cars = generateRandomCars();
+  await Promise.all(cars.map(async (car) => createCar(car)));
+  await updateState();
+  renderGarage();
+  e.target.disabled = false;
+  buttonDisable();
+};
+
+export { createCarHandler, updateCarHandler, selectCarHandler, deleteCarHandler, generateHandler };

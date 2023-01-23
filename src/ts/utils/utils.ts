@@ -10,4 +10,6 @@ const getExistentElement = <T extends HTMLElement>(selector: string, node: Docum
   return el;
 };
 
-export { createElement, getExistentElement };
+const carsOnPage = 7;
+
+export { createElement, getExistentElement, carsOnPage };

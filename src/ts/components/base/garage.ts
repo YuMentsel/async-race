@@ -15,7 +15,7 @@ const createGarageOptionsHTML = (): string =>
     </form>
     <div class="options__race">
       <button id="race" class="button_race button">Race</button>
-      <button id="reset" class="button_race button">Reset</button>
+      <button id="reset" class="button_race button" disabled>Reset</button>
       <button id="generate-cars" class="button">Generate cars</button>
     </div>
   </div>`;
@@ -27,7 +27,7 @@ const createGarageHTML = (page = 1): string =>
     ${state.cars.map((car) => `${createCarHTML(car)}`).join('')}
     </div>
     <div class="garage__pagination pagination">
-      <button class="button prev">Prev</button>
+      <button class="button prev" disabled>Prev</button>
       <span class="pagination__page">${page}</span>
       <button class="button next">Next</button>
     </div>

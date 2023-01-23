@@ -6,7 +6,7 @@ const state: StateObj = {
   carsCount: 1,
   garagePage: 1,
   selectedId: null,
-  appPage: 'garage',
+  page: 'garage',
   animation: {},
 };
 

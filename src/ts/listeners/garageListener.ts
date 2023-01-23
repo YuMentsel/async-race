@@ -1,24 +1,26 @@
 import { getExistentElement } from '../utils/utils';
-import { startCar, stopCar } from './animationCars';
-import { createCarHandler, updateCarHandler, selectCarHandler, deleteCarHandler } from './viewCarHandlers';
+import { startCar, stopCar } from './handlers/animationCarsHandlers';
+import { raceHandler, resetHandler } from './handlers/raceHandler';
+import { showGaragePage, showWinnersPage } from './handlers/pageHandler';
+import { buttonDisable, prevButtonHandler, nextButtonHandler } from './handlers/paginationHandlers';
 
-const raceHandler = async (e: Event) => {
-  if (!(e.target instanceof HTMLButtonElement)) return;
-  e.target.disabled = true;
-  getExistentElement<HTMLFormElement>('#reset').disabled = false;
-};
+import {
+  createCarHandler,
+  updateCarHandler,
+  selectCarHandler,
+  deleteCarHandler,
+  generateHandler,
+} from './handlers/viewCarHandlers';
 
-const resetHandler = async (e: Event) => {
-  if (!(e.target instanceof HTMLButtonElement)) return;
-  e.target.disabled = true;
-  getExistentElement<HTMLFormElement>('#race').disabled = false;
-};
-
-const listenEvents = async () => {
+const listenEvents = () => {
+  buttonDisable();
   getExistentElement<HTMLFormElement>('#create').addEventListener('submit', (e) => createCarHandler(e));
   getExistentElement<HTMLFormElement>('#update').addEventListener('submit', (e) => updateCarHandler(e));
   getExistentElement<HTMLButtonElement>('#race').addEventListener('click', (e) => raceHandler(e));
   getExistentElement<HTMLButtonElement>('#reset').addEventListener('click', (e) => resetHandler(e));
+  getExistentElement<HTMLButtonElement>('#generate-cars').addEventListener('click', (e) => generateHandler(e));
+  getExistentElement<HTMLButtonElement>('#garage-btn').addEventListener('click', showGaragePage);
+  getExistentElement<HTMLButtonElement>('#winners-btn').addEventListener('click', showWinnersPage);
 
   document.addEventListener('click', async (e) => {
     const { target } = e;
@@ -30,6 +32,8 @@ const listenEvents = async () => {
     if (target.classList.contains('stop')) deleteCarHandler(target);
     if (target.classList.contains('start') && target.dataset.start) startCar(+target.dataset.start);
     if (target.classList.contains('stop') && target.dataset.stop) stopCar(+target.dataset.stop);
+    if (target.classList.contains('prev')) prevButtonHandler();
+    if (target.classList.contains('next')) nextButtonHandler();
   });
 };
 
