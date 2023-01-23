@@ -1,7 +1,7 @@
 import { getExistentElement } from '../utils/utils';
 import { startCar, stopCar } from './handlers/animationCarsHandlers';
 import { raceHandler, resetHandler } from './handlers/raceHandler';
-import { showGaragePage, showWinnersPage } from './handlers/pageHandler';
+import { showGaragePage, showWinnersPage } from './handlers/showPageHandler';
 import { buttonDisable, prevButtonHandler, nextButtonHandler } from './handlers/paginationHandlers';
 
 import {

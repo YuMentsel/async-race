@@ -6,12 +6,13 @@ import createFooterHTML from './components/base/footer';
 const renderPage = () => {
   const header: HTMLElement = createElement('header', 'header');
   const garage: HTMLElement = createElement('main', 'garage');
+  const winners: HTMLElement = createElement('section', 'winners');
   const footer: HTMLElement = createElement('footer', 'footer');
 
   header.innerHTML = createHeaderHTML();
   footer.innerHTML = createFooterHTML();
 
-  document.body.append(header, garage, footer);
+  document.body.append(header, garage, winners, footer);
 };
 
 const renderGarageOptions = () => {

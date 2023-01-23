@@ -25,14 +25,20 @@ interface StateObj {
   garagePage: number;
   selectedId: number | null;
   animation: ObjObj;
+  winners: WinnerId[];
+  winnersCount: number;
+  winnersPage: number;
   page: string;
+  sortBy: null | string;
+  sortOrder: null | string;
+  selectedCarID: number | null;
 }
 
-export interface ObjObj {
+interface ObjObj {
   [id: string]: ObjNum;
 }
 
-export interface ObjNum {
+interface ObjNum {
   [id: string]: number;
 }
 
@@ -56,10 +62,63 @@ interface Winner {
   color?: string;
   time: number;
 }
+interface NewWinner {
+  id: number;
+  name?: string;
+  color?: string;
+  time: number;
+}
+
+type GetWinners = {
+  id: number;
+  wins: number;
+  time: number;
+};
+
+interface GetWinnersId {
+  items: WinnerId[];
+  count: number;
+}
+interface WinnerId {
+  id: number;
+  wins: number;
+  time: number;
+  car: Car;
+}
+
+type WinnersParams = {
+  page: number;
+  limit?: number;
+  sort: string | null;
+  order: string | null;
+};
+
+type SaveWinner = {
+  id: number;
+  time: number;
+};
 
 enum StatePage {
   garage = 'garage',
   winners = 'winners',
 }
 
-export { Car, Cars, CreateCar, StateObj, UpdateCar, RaceParams, Engine, Winners, Winner, StatePage };
+export {
+  Car,
+  Cars,
+  CreateCar,
+  StateObj,
+  UpdateCar,
+  RaceParams,
+  Engine,
+  Winners,
+  WinnerId,
+  NewWinner,
+  Winner,
+  StatePage,
+  GetWinners,
+  GetWinnersId,
+  WinnersParams,
+  SaveWinner,
+  ObjNum,
+};

@@ -4,6 +4,8 @@ import { state, updateState } from '../../components/state';
 import { getCar, createCar, updateCar, deleteCar } from '../../api/api';
 import generateRandomCars from '../../utils/generateCars';
 import { buttonDisable } from './paginationHandlers';
+import { removeWinners, renderWinners } from '../../winners/winnersPage';
+import { getWinner, deleteWinner } from '../../api/winnersApi';
 
 const createCarHandler = async (e: Event) => {
   e.preventDefault();
@@ -41,11 +43,14 @@ const updateCarHandler = async (e: Event) => {
 
 const selectCarHandler = async (target: HTMLButtonElement) => {
   if (!target.dataset.id) return;
+  const { id } = target.dataset;
+  getExistentElement<HTMLButtonElement>(`#race`).disabled = true;
+  getExistentElement<HTMLButtonElement>(`#start-${id}`).disabled = true;
   const name = getExistentElement<HTMLInputElement>('#update .options__input-text');
   const color = getExistentElement<HTMLInputElement>('#update .options__input-color');
   const button = getExistentElement<HTMLInputElement>('#update button');
-  const selectedCar = await getCar(+target.dataset.id);
-  state.selectedId = +target.dataset.id;
+  const selectedCar = await getCar(+id);
+  state.selectedId = +id;
   name.value = selectedCar.name;
   color.value = selectedCar.color;
   name.disabled = false;
@@ -57,8 +62,11 @@ const deleteCarHandler = async (target: HTMLButtonElement) => {
   if (!target.dataset.id) return;
   const id = +target.dataset.id;
   await deleteCar(id);
+  if (await getWinner(id)) await deleteWinner(id);
   await updateState();
   renderGarage();
+  removeWinners();
+  renderWinners();
   buttonDisable();
 };
 

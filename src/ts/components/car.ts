@@ -11,7 +11,9 @@ const createCarHTML = ({ id, name, color }: Car): string =>
     <span class="car__name">${name}</span>
     <span id="message-${id}" class="car__message"></span>
   </div>
-  ${createCarSVG(id, color)}
+    <div id="car-${id}" class="car__svg">
+      ${createCarSVG(color)}
+    </div>
   ${createFinishSVG(id)}
 </div>`;
 
