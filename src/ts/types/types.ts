@@ -103,6 +103,16 @@ enum StatePage {
   winners = 'winners',
 }
 
+enum SortBy {
+  time = 'time',
+  wins = 'wins',
+}
+
+enum SortOrder {
+  asc = 'asc',
+  desc = 'desc',
+}
+
 export {
   Car,
   Cars,
@@ -121,4 +131,6 @@ export {
   WinnersParams,
   SaveWinner,
   ObjNum,
+  SortBy,
+  SortOrder,
 };
