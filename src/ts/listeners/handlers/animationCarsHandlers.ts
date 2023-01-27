@@ -37,12 +37,14 @@ const startCar = async (id: number) => {
   const { success } = await drive(id);
   if (success === false) {
     window.cancelAnimationFrame(state.animation[id].id);
-    const message = getExistentElement(`#message-${id}`);
-    message.textContent = `The engine was broken down`;
+    const message = document.querySelector(`#message-${id}`);
+    if (message) {
+      message.textContent = `The engine was broken down`;
 
-    setTimeout(() => {
-      message.textContent = '';
-    }, 1500);
+      setTimeout(() => {
+        message.textContent = '';
+      }, 1500);
+    }
   }
   return { success, id, time };
 };

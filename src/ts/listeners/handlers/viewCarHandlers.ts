@@ -42,6 +42,7 @@ const updateCarHandler = async (e: Event) => {
   button.disabled = true;
   state.selectedId = null;
   disableRacCreGen(false);
+  paginationBtnDisable();
 };
 
 const selectCarHandler = async (target: HTMLButtonElement) => {
