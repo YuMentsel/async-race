@@ -13,18 +13,22 @@
   }
 
   td {
+    padding: 15px;
     border: 1px dashed #fff;
     text-align: center;
-    width: 100px;
+    width: 20%;
     height: 60px;
+    svg {
+      width: 75px;
+    }
   }
 
   .wins,
   .time {
     cursor: pointer;
-  }
-
-  #winners-view {
-    display: none;
+    transition: 0.3s;
+    &:hover {
+      color: $button-border-hover;
+    }
   }
 }

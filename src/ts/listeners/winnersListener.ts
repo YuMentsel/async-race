@@ -1,13 +1,11 @@
-// import { state } from '../components/state';
 import { updateWinners, state } from '../components/state';
-import { removeWinners, renderWinners } from '../winners/winnersPage';
+import { removeWinners, renderWinners } from '../render/winnersPage';
 import { getExistentElement } from '../utils/utils';
-import { SortBy, SortOrder } from '../types/types';
+import { SortBy, SortOrder } from '../types/enams';
 
-const sortWinners = async (sortType: 'wins' | 'time') => {
+const sortWinners = async (sortType: SortBy) => {
   state.sortBy = sortType;
   state.sortOrder = state.sortOrder === SortOrder.asc ? SortOrder.desc : SortOrder.asc;
-  console.log(state.sortBy, state.sortOrder);
   await updateWinners();
   removeWinners();
   renderWinners();

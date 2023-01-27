@@ -56,12 +56,14 @@ interface Winners {
   success: boolean;
   time: number;
 }
+
 interface Winner {
   id?: number;
   name?: string;
   color?: string;
   time: number;
 }
+
 interface NewWinner {
   id: number;
   name?: string;
@@ -79,6 +81,7 @@ interface GetWinnersId {
   items: WinnerId[];
   count: number;
 }
+
 interface WinnerId {
   id: number;
   wins: number;
@@ -98,21 +101,6 @@ type SaveWinner = {
   time: number;
 };
 
-enum StatePage {
-  garage = 'garage',
-  winners = 'winners',
-}
-
-enum SortBy {
-  time = 'time',
-  wins = 'wins',
-}
-
-enum SortOrder {
-  asc = 'asc',
-  desc = 'desc',
-}
-
 export {
   Car,
   Cars,
@@ -125,12 +113,9 @@ export {
   WinnerId,
   NewWinner,
   Winner,
-  StatePage,
   GetWinners,
   GetWinnersId,
   WinnersParams,
   SaveWinner,
   ObjNum,
-  SortBy,
-  SortOrder,
 };

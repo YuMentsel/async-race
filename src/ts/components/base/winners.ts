@@ -1,13 +1,13 @@
 import { WinnerId } from '../../types/types';
 import { state } from '../state';
-import { createCarSVG } from '../carSVG';
+import { createCarSvg } from '../car/carSvg';
 
 const createWinnersTable = (winners: WinnerId[]) => {
   const winnersTable = winners.map(
     (winner, index) =>
       `<tr>
       <td>${index + 1}</td>
-      <td>${createCarSVG(winner.car.color)}</td>
+      <td>${createCarSvg(winner.car.color)}</td>
       <td>${winner.car.name}</td>
       <td>${winner.wins}</td>
       <td>${winner.time}</td>

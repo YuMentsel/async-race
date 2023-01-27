@@ -1,24 +1,26 @@
 import { getExistentElement } from '../../utils/utils';
-import { renderGarage } from '../../app';
+import { renderGarage } from '../../render/garagePage';
 import { state, updateState } from '../../components/state';
 import { getCar, createCar, updateCar, deleteCar } from '../../api/api';
 import generateRandomCars from '../../utils/generateCars';
-import { buttonDisable } from './paginationHandlers';
-import { removeWinners, renderWinners } from '../../winners/winnersPage';
+import { removeWinners, renderWinners } from '../../render/winnersPage';
 import { getWinner, deleteWinner } from '../../api/winnersApi';
+import { disableBtnWhenSelect, disableRacCreGen, paginationBtnDisable } from '../../utils/disableButtons';
+import { checkCars } from './paginationHandlers';
 
 const createCarHandler = async (e: Event) => {
   e.preventDefault();
   const name = getExistentElement<HTMLInputElement>('#create .options__input-text');
+  const nameValue = name.value || 'Unknown';
   const color = getExistentElement<HTMLInputElement>('#create .options__input-color');
-  const carParams = new Map().set('name', name.value).set('color', color.value);
+  const carParams = new Map().set('name', nameValue).set('color', color.value);
   const newCar = Object.fromEntries(carParams);
   await createCar(newCar);
   await updateState();
   renderGarage();
   name.value = '';
   color.value = '#ffffff';
-  buttonDisable();
+  paginationBtnDisable();
 };
 
 const updateCarHandler = async (e: Event) => {
@@ -39,13 +41,13 @@ const updateCarHandler = async (e: Event) => {
   color.disabled = true;
   button.disabled = true;
   state.selectedId = null;
+  disableRacCreGen(false);
 };
 
 const selectCarHandler = async (target: HTMLButtonElement) => {
   if (!target.dataset.id) return;
   const { id } = target.dataset;
-  getExistentElement<HTMLButtonElement>(`#race`).disabled = true;
-  getExistentElement<HTMLButtonElement>(`#start-${id}`).disabled = true;
+  disableBtnWhenSelect(+id);
   const name = getExistentElement<HTMLInputElement>('#update .options__input-text');
   const color = getExistentElement<HTMLInputElement>('#update .options__input-color');
   const button = getExistentElement<HTMLInputElement>('#update button');
@@ -67,7 +69,10 @@ const deleteCarHandler = async (target: HTMLButtonElement) => {
   renderGarage();
   removeWinners();
   renderWinners();
-  buttonDisable();
+  disableRacCreGen(false);
+  getExistentElement<HTMLButtonElement>('#winners-btn').disabled = false;
+  checkCars();
+  paginationBtnDisable();
 };
 
 const generateHandler = async (e: Event) => {
@@ -78,7 +83,7 @@ const generateHandler = async (e: Event) => {
   await updateState();
   renderGarage();
   e.target.disabled = false;
-  buttonDisable();
+  paginationBtnDisable();
 };
 
 export { createCarHandler, updateCarHandler, selectCarHandler, deleteCarHandler, generateHandler };

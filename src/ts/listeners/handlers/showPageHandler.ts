@@ -1,8 +1,8 @@
 import { getExistentElement } from '../../utils/utils';
-import { buttonDisable } from './paginationHandlers';
+import { paginationBtnDisable } from '../../utils/disableButtons';
 import { state } from '../../components/state';
-import { StatePage } from '../../types/types';
-import { removeWinners, renderWinners } from '../../winners/winnersPage';
+import { StatePage } from '../../types/enams';
+import { removeWinners, renderWinners } from '../../render/winnersPage';
 
 const showGaragePage = () => {
   getExistentElement('.garage').style.display = 'block';
@@ -10,7 +10,9 @@ const showGaragePage = () => {
   getExistentElement('.winners').style.display = 'none';
 
   state.page = StatePage.garage;
-  buttonDisable();
+  getExistentElement<HTMLButtonElement>('#winners-btn').disabled = false;
+  getExistentElement<HTMLButtonElement>('#garage-btn').disabled = true;
+  paginationBtnDisable();
 };
 
 const showWinnersPage = () => {
@@ -21,7 +23,9 @@ const showWinnersPage = () => {
   getExistentElement('.winners').style.display = 'block';
 
   state.page = StatePage.winners;
-  buttonDisable();
+  getExistentElement<HTMLButtonElement>('#winners-btn').disabled = true;
+  getExistentElement<HTMLButtonElement>('#garage-btn').disabled = false;
+  paginationBtnDisable();
 };
 
 export { showGaragePage, showWinnersPage };

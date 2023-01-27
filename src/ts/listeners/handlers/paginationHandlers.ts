@@ -1,39 +1,9 @@
-import { getExistentElement, carsOnPage, winnerssOnPage } from '../../utils/utils';
+import { getExistentElement } from '../../utils/utils';
+import { paginationBtnDisable } from '../../utils/disableButtons';
 import { state, updateWinners, updateCars } from '../../components/state';
-import { renderWinners, removeWinners } from '../../winners/winnersPage';
-import { StatePage } from '../../types/types';
-import { renderGarage } from '../../app';
-
-const buttonDisable = () => {
-  const prevButton = getExistentElement<HTMLButtonElement>('.prev');
-  const nextButton = getExistentElement<HTMLButtonElement>('.next');
-  const page = getExistentElement('#page');
-  if (state.page === StatePage.garage) {
-    page.textContent = state.garagePage.toString();
-    if (state.garagePage > 1) {
-      prevButton.disabled = false;
-    } else {
-      prevButton.disabled = true;
-    }
-    if (state.garagePage * carsOnPage < state.carsCount) {
-      nextButton.disabled = false;
-    } else {
-      nextButton.disabled = true;
-    }
-  } else {
-    page.textContent = state.winnersPage.toString();
-    if (state.winnersPage > 1) {
-      prevButton.disabled = false;
-    } else {
-      prevButton.disabled = true;
-    }
-    if (state.winnersPage * winnerssOnPage < state.winnersCount) {
-      nextButton.disabled = false;
-    } else {
-      nextButton.disabled = true;
-    }
-  }
-};
+import { renderWinners, removeWinners } from '../../render/winnersPage';
+import { StatePage } from '../../types/enams';
+import { renderGarage } from '../../render/garagePage';
 
 const prevButtonHandler = async () => {
   if (state.page === StatePage.garage) {
@@ -47,7 +17,7 @@ const prevButtonHandler = async () => {
     renderWinners();
     getExistentElement('.winners').style.display = 'block';
   }
-  buttonDisable();
+  paginationBtnDisable();
 };
 
 const nextButtonHandler = async () => {
@@ -62,13 +32,11 @@ const nextButtonHandler = async () => {
     renderWinners();
     getExistentElement('.winners').style.display = 'block';
   }
-  buttonDisable();
+  paginationBtnDisable();
 };
 
 const checkCars = () => {
-  if (!(state.carsCount % carsOnPage)) {
-    prevButtonHandler();
-  }
+  if (state.cars.length === 0) prevButtonHandler();
 };
 
-export { buttonDisable, prevButtonHandler, nextButtonHandler, checkCars };
+export { prevButtonHandler, nextButtonHandler, checkCars };

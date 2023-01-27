@@ -1,5 +1,5 @@
-import { Car } from '../types/types';
-import { createCarSVG, createFinishSVG } from './carSVG';
+import { Car } from '../../types/types';
+import { createCarSvg, createFinishSvg } from './carSvg';
 
 const createCarHTML = ({ id, name, color }: Car): string =>
   `<div class="car">
@@ -12,9 +12,9 @@ const createCarHTML = ({ id, name, color }: Car): string =>
     <span id="message-${id}" class="car__message"></span>
   </div>
     <div id="car-${id}" class="car__svg">
-      ${createCarSVG(color)}
+      ${createCarSvg(color)}
     </div>
-  ${createFinishSVG(id)}
+  ${createFinishSvg(id)}
 </div>`;
 
 export default createCarHTML;

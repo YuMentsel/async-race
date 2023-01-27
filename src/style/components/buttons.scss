@@ -9,6 +9,7 @@
   border: 3px solid $button-border;
   color: $main;
   vertical-align: top;
+  transition: .3s;
   &:hover,
   &:active {
     background: $button-hover;

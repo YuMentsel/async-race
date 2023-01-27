@@ -1,4 +1,4 @@
-import createCarHTML from '../car';
+import createCarHTML from '../car/car';
 import { state } from '../state';
 
 const createGarageOptionsHTML = (): string =>

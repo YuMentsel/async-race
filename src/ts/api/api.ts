@@ -1,11 +1,11 @@
 import { Car, Cars, CreateCar, UpdateCar, RaceParams, Engine } from '../types/types';
-import { carsOnPage } from '../utils/utils';
+import { ElemetnsOnPage } from '../types/enams';
 
 const server = 'http://localhost:3000';
 const garage = `${server}/garage`;
 const engine = `${server}/engine`;
 
-const getAllCars = async (page: number, limit = carsOnPage): Promise<Cars> => {
+const getAllCars = async (page: number, limit = ElemetnsOnPage.cars): Promise<Cars> => {
   const res = await fetch(`${garage}?_page=${page}&_limit=${limit}`);
   return {
     items: await res.json(),
